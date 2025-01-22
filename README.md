@@ -55,3 +55,13 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+
+### Some useful URLs and Info
+Frontend: http://localhost:5173/
+Backend: http://127.0.0.1:81/admin
+
+Devtools Frontend: http://localhost:5173/__devtools__/
+
+Credentials to the Django Panel
+User: admin
+pw: admin
