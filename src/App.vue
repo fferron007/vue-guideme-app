@@ -1,11 +1,17 @@
 <template>
-  <div id="app" style="display: flex; height: 100vh">
-    <div style="width: 30%; padding: 1rem">
+  <div id="app" style="display: flex; flex-direction: column; height: 100vh">
+    <!-- Filters on top in one line -->
+    <div style="display: flex; padding: 1rem; gap: 1rem; background-color: #f8f8f8;">
       <Filters :filters="filters" @updateFilters="updateFilters" />
-      <MerchantList :merchants="merchants" />
     </div>
-    <div style="width: 70%">
-      <Map :merchants="merchants" />
+    <!-- Main content: Merchant list on the left and map on the right -->
+    <div style="display: flex; flex: 1;">
+      <div style="width: 30%; padding: 1rem; overflow-y: auto;">
+        <MerchantList :merchants="merchants" />
+      </div>
+      <div style="width: 70%; height: 100%;">
+        <Map :merchants="merchants" />
+      </div>
     </div>
   </div>
 </template>
@@ -27,13 +33,13 @@ export default {
   },
   methods: {
     fetchFilters() {
-      axios.get('http://127.0.0.1:81/api/filters/').then((response) => {
+      axios.get('http://127.0.0.1:81/api/filters').then((response) => {
         this.filters = response.data;
       });
     },
     fetchMerchants() {
       axios
-        .get('http://127.0.0.1:81/api/merchants/', { params: this.selectedFilters })
+        .get('http://127.0.0.1:81/api/merchants', { params: this.selectedFilters })
         .then((response) => {
           this.merchants = response.data;
         });
